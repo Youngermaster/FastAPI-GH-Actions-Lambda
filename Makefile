@@ -3,7 +3,8 @@
 GIT_BRANCH=$(shell git rev-parse --abbrev-ref HEAD | sed -r 's/[\/]+/-/g' | sed -r 's/feature-//g' | cut -c 1-20)
 GIT_TAG=$(shell git tag --points-at HEAD | cut -c 1-3)
 
-STAGE ?= $(if $(GIT_TAG), $(GIT_TAG), $(GIT_BRANCH))
+#STAGE ?= $(if $(GIT_TAG), $(GIT_TAG), $(GIT_BRANCH))
+STAGE ?= prod
 
 AWS_DEFAULT_REGION ?= us-east-1
 
@@ -12,6 +13,7 @@ serverless:
 	# install serverless framework for Continous Deployment
 	npm install -g serverless || true
 	sls plugin install -n serverless-python-requirements
+	sls plugin install -n serverless-localstack
 
 deps: serverless
 	pip install -r requirements.txt

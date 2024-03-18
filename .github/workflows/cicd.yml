@@ -1,7 +1,5 @@
-name: CI/CD
+name: FastAPI CI/CD
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches: ["main"]
@@ -30,7 +28,7 @@ jobs:
       - name: Install NodeJS for serverless framework
         uses: actions/setup-node@v1
         with:
-          node-version: "18.x"
+          node-version: "20.x"
 
       - name: Installing Serverless framework and plugins
         run: make serverless
