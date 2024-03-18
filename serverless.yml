@@ -1,5 +1,6 @@
 service: serverless-fastapi
 
+# Use useDotenv: true to load environment variables from .env file when running serverless commands locally
 useDotenv: true
 
 plugins:
@@ -23,7 +24,7 @@ package:
     - tests/*
     - docs/*
     - node_modules/*
-    - .venv/*
+    - venv/*
     - .serverless/*
     - package.json
     - package-lock.json
@@ -32,14 +33,18 @@ package:
 
 custom:
   pythonRequirements:
-    dockerizePip: non-linux
+    dockerizePip: true
     slim: true
-    strip: true
+    strip: false
     layer:
       name: PythonRequirementsLambdaLayer
       description: Python requirements layer
       compatibleRuntimes:
         - python3.11
+
+  localstack:
+    stages:
+      - local
 
 functions:
   api:

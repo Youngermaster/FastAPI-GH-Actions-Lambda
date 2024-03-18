@@ -46,4 +46,8 @@ jobs:
         run: make ci
 
       - name: CD
+        env:
+          PORT: ${{ secrets.PORT }}
+          PROJECT_ENVIRONMENT: ${{ secrets.PROJECT_ENVIRONMENT }}
+          API_HOST: ${{ secrets.API_HOST }}
         run: make cd
