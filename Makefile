@@ -9,16 +9,12 @@ AWS_DEFAULT_REGION ?= us-east-1
 
 #==========================================================================
 serverless:
-	#install serverless framework for Continous Deployment
-	npm install -g serverless@3.15.2 || true
+	# install serverless framework for Continous Deployment
+	npm install -g serverless || true
 	sls plugin install -n serverless-python-requirements
-	sls plugin install -n serverless-domain-manager
-	sls plugin install -n serverless-localstack
-	touch $@
 
 deps: serverless
 	pip install -r requirements.txt
-	touch $@
 
 black: deps
 	black app/*

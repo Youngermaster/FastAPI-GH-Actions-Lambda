@@ -2,14 +2,10 @@ service: serverless-fastapi
 
 plugins:
   - serverless-python-requirements
-  - serverless-localstack
 provider:
   name: aws
-  runtime: python3.10
-  stage: ${opt:stage, "dev"}
-  region: eu-west-1
-  deploymentBucket:
-    name: serverless-fastapi-deploy
+  runtime: python3.11
+  region: us-east-1
 
 package:
   exclude:
@@ -26,27 +22,13 @@ package:
     - .pytest_cache
     - .hypothesis
 
-custom:
-  pythonRequirements:
-    dockerizePip: true
-    layer:
-      name: serverless-fastapi-deps
-      description: Dependencies of serverless-fastapi
-      compatibleRuntimes:
-        - python3.10
-
-  localstack:
-    stages:
-      - local
-
 functions:
   api:
-    handler: api.main.handler
-    environment:
-      STAGE: ${self:provider.stage}
-    layers:
-      - { Ref: PythonRequirementsLambdaLayer }
+    handler: app.main.handler
     events:
       - http:
-          method: any
-          path: /{proxy+}
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: "{proxy+}"
