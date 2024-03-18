@@ -14,6 +14,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      PORT: ${{ secrets.PORT }}
+      PROJECT_ENVIRONMENT: ${{ secrets.PROJECT_ENVIRONMENT }}
+      API_HOST: ${{ secrets.API_HOST }}
+
     steps:
       - uses: actions/checkout@v2
 

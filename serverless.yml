@@ -1,11 +1,18 @@
 service: serverless-fastapi
 
+useDotenv: true
+
 plugins:
   - serverless-python-requirements
+
 provider:
   name: aws
   runtime: python3.11
   region: us-east-1
+  environment:
+    PORT: ${env:PORT}
+    PROJECT_ENVIRONMENT: ${env:PROJECT_ENVIRONMENT}
+    API_HOST: ${env:API_HOST}
 
 package:
   exclude:
