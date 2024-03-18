@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PORT=${PORT}
+      - PROJECT_ENVIRONMENT=${PROJECT_ENVIRONMENT}
+      - API_HOST=${API_HOST}
+    ports:
+      - "8000:8000"
