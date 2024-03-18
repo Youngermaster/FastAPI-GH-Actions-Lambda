@@ -5,7 +5,7 @@ plugins:
   - serverless-localstack
 provider:
   name: aws
-  runtime: python3.10
+  runtime: python3.8
   stage: ${opt:stage, "dev"}
   region: eu-west-1
   deploymentBucket:
@@ -33,7 +33,7 @@ custom:
       name: serverless-fastapi-deps
       description: Dependencies of serverless-fastapi
       compatibleRuntimes:
-        - python3.10
+        - python3.8
 
   localstack:
     stages:
